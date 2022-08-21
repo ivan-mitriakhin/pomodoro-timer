@@ -1,0 +1,146 @@
+$mainColor: #000;
+
+.app {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.labels {
+    width: 600px;
+    height: 20%;
+
+    #break-label, #session-label {
+        width: 250px;
+        height: 100%;
+        border: 4px solid $mainColor;
+        display:flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .length {
+        font-weight: bold;
+        font-size: 1.35em;
+    }
+
+    i {
+        font-size: 2em;
+    }
+}
+
+#timer-controller {
+    #timer-display {
+        width: 300px;
+        height: 180px;
+        margin-top: 40px;
+        border: 4px solid $mainColor;
+        display:flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+
+        h1 {
+            font-size: 5em;
+        }
+
+        h3 {
+            font-size: 2.25em;
+        }
+    }
+
+    #buttons {
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+
+        #reset, #start-stop {
+            width: 40px;
+            height: 40px;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .labels {
+        width: 300px;
+
+        #break-label, #session-label {
+            width: 140px;
+        }
+
+        h3 {
+            font-size: 1.1em;
+        }
+
+        .length {
+            font-size: 1.15em;
+            margin-left: 1px!important;
+            margin-right: 1px!important;
+        }
+    
+        i {
+            font-size: 1.25em;
+        }
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .labels {
+        width: 250px;
+
+        #break-label, #session-label {
+            width: 120px;
+        }
+
+        h3 {
+            font-size: 1em;
+        }
+
+        .length {
+            font-size: 1em;
+            margin-left: 1px!important;
+            margin-right: 1px!important;
+        }
+    
+        i {
+            font-size: 1em;
+        }
+    }
+
+    #timer-controller {
+        #timer-display {
+            width: 240px;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) and (min-height: 800px) {
+    .labels {
+        #break-label, #session-label {
+            height: 100px;
+        }
+    }
+
+    #timer-controller {
+        #timer-display {
+            margin-top: 0;
+        } 
+    }
+}
+
+@media screen and (max-width: 920px) and (min-height: 1000px) {
+    .labels {
+        #break-label, #session-label {
+            height: 140px;
+        }
+    }
+
+    #timer-controller {
+        #timer-display {
+            margin-top: -40px;
+        }
+    }
+}
