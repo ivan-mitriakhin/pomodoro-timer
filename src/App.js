@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import './App.css';
 
 function BreakLabel(props) {
@@ -54,13 +55,8 @@ function TimerController(props) {
         </h1>
       </div>
       <div id="buttons">
-        <button id="start_stop" onClick={props.startStop}>
-          <i className="bi bi-play-fill"></i>
-          <i className="bi bi-pause-fill"></i>
-        </button>
-        <button className="ms-2" id="reset" onClick={props.reset}>
-          <i className="bi bi-bootstrap-reboot"></i>
-        </button>
+        <i className="btn bi bi-play-fill" id="start_stop" onClick={props.startStop}></i>
+        <i className="btn bi bi-bootstrap-reboot" id="reset" onClick={props.reset}></i>
       </div>
     </div>
   );
@@ -98,7 +94,8 @@ function App() {
   }, [currentTime, isPaused]);
 
   /* HANDLING THE CHANGE OF SESSION LENGTH AND BREAK LENGTH */
-  const decrementSessionLength = () => {
+  const decrementSessionLength = (event) => {
+    activateButton(event);
     if (isPaused && sessionLength > 1) {
       sessionLengthRef.current -= 1;
       setSessionLength(sessionLengthRef.current);
@@ -106,9 +103,11 @@ function App() {
         setCurrentTime(sessionLengthRef.current * 60);
       }
     }
+    deactivateButton(event);
   };
 
-  const incrementSessionLength = () => {
+  const incrementSessionLength = (event) => {
+    activateButton(event);
     if (isPaused && sessionLength < 60) {
       sessionLengthRef.current += 1;
       setSessionLength(sessionLengthRef.current);
@@ -116,9 +115,12 @@ function App() {
         setCurrentTime(sessionLengthRef.current * 60);
       }
     }
+    deactivateButton(event);
   };
 
-  const decrementBreakLength = () => {
+  const decrementBreakLength = (event) => 
+  {
+    activateButton(event);
     if (isPaused && breakLength > 1) {
       breakLengthRef.current -= 1;
       setBreakLength(breakLengthRef.current);
@@ -126,9 +128,11 @@ function App() {
         setCurrentTime(breakLengthRef.current * 60);
       }
     }
+    deactivateButton(event);
   };
 
-  const incrementBreakLength = () => {
+  const incrementBreakLength = (event) => {
+    activateButton(event);
     if (isPaused && breakLength < 60) {
       breakLengthRef.current += 1;
       setBreakLength(breakLengthRef.current);
@@ -136,20 +140,24 @@ function App() {
         setCurrentTime(breakLengthRef.current * 60);
       }
     }
+    deactivateButton(event);
   };
   
   /* HANDLING STARTSTOP BUTTON WITH ISPAUSED STATE CHANGE*/
-  const handleStartStop = () => {
+  const handleStartStop = (event) => {
+    activateButton(event);
     if (isPaused) {
       setIsPaused(false);
     } else {
       setIsPaused(true);
     }
+    deactivateButton(event);
   };
 
   /* SETS STATE TO DEFAULT VALUES WHICH ARE BASICALLY THE SAME 
      AS PARAMETERS IN CORRESPONDING USESTATE HOOKS */
-  const handleReset = () => {
+  const handleReset = (event) => {
+    activateButton(event);
     stopSound();
     sessionLengthRef.current = 25;
     breakLengthRef.current = 5;
@@ -158,6 +166,22 @@ function App() {
     setIsSession(true);
     setIsPaused(true);
     setCurrentTime(25 * 60);
+    deactivateButton(event);
+  }
+
+  /* CHANGES THE STYLE OF BUTTON SO THAT USER KNOWS HE DID 
+     REALLY PRESS THE BUTTON */
+  const activateButton = (event) => {
+    event.target.style.transition = "all 0.2s ease-in-out";
+    event.target.style.color = "#edeef0";
+    event.target.style.backgroundColor = "#000";
+  }
+
+  const deactivateButton = (event) => {
+    setTimeout(() => {
+      event.target.style.color = "#000";
+      event.target.style.backgroundColor = "#edeef0";
+    }, 100);
   }
 
   /* PLAYS AN AUDIO THAT INDICATES THAT THE TIMER IS UP */
