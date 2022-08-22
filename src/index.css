@@ -10,4 +10,5 @@ body {
     sans-serif;
   background-color: #edeef0;
   color: #000;
+  user-select:none;
 }
