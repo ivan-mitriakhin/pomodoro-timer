@@ -6,6 +6,6 @@ This is a pomodoro timer built from scratch using React, Bootstrap and SCSS.
 
 # Preview
 
- * [[FCC] Pomodoro Timer (25 + 5 Clock)](https://ivan-mitriakhin.github.io/calculator/)
+ * [[FCC] Pomodoro Timer (25 + 5 Clock)](https://ivan-mitriakhin.github.io/pomodoro-timer/)
 
 
